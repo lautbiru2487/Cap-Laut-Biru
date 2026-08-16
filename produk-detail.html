@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Detail Produk | Cap Laut Biru</title>
+<meta name="description" id="pageDesc" content="Detail produk kerupuk Cap Laut Biru.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img class="stamp-mini" src="assets/logo-dark.svg" alt="Cap Laut Biru">
+      <span class="brand-name">Cap Laut Biru<small>Pesisir Pasuruan</small></span>
+    </a>
+    <nav class="nav-menu" id="navMenu">
+      <a href="index.html">Beranda</a>
+      <a href="produk.html">Produk</a>
+      <a href="tentang.html">Tentang Kami</a>
+      <a href="index.html#kenapa">Kenapa Cap Laut Biru?</a>
+      <a href="index.html#cara-pesan">Cara Pesan</a>
+      <a href="faq.html">FAQ</a>
+      <a href="kontak.html">Kontak</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" data-link="whatsapp" target="_blank" rel="noopener"><span class="long">BELI</span> SEKARANG</a>
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:0;">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Beranda</a> / <a href="produk.html">Produk</a> / <span id="crumbName">...</span></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:32px;">
+  <div class="container detail-grid" id="detailContent">
+    <!-- Diisi otomatis oleh JS -->
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand-name">Cap Laut Biru</span>
+        <p>Kerupuk lokal dari pesisir Pasuruan, Jawa Timur.</p>
+      </div>
+      <div>
+        <h5>Menu</h5>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="produk.html">Produk</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontak</h5>
+        <ul>
+          <li><a href="kontak.html">Hubungi Kami</a></li>
+          <li><a data-link="whatsapp" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Sosial Media</h5>
+        <ul>
+          <li><a data-link="INSTAGRAM_URL" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a data-link="SHOPEE_URL" target="_blank" rel="noopener">Shopee</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Cap Laut Biru. All Rights Reserved.</span></div>
+  </div>
+</footer>
+
+<a class="wa-float" data-link="whatsapp" target="_blank" rel="noopener" aria-label="Chat WhatsApp">💬</a>
+<div class="mobile-cta-bar">
+  <a class="btn btn-secondary btn-block" data-link="SHOPEE_URL" target="_blank" rel="noopener">🛒 Shopee</a>
+  <a class="btn btn-primary btn-block" data-link="whatsapp" target="_blank" rel="noopener">💬 WhatsApp</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/data-loader.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener("clb:ready", () => {
+    const id = new URLSearchParams(location.search).get("id");
+    const p = CLB_DATA.PRODUCTS.find(x => x.slug === id) || CLB_DATA.PRODUCTS[0];
+    const el = document.getElementById("detailContent");
+    if (!p) { el.innerHTML = "<p>Produk tidak ditemukan.</p>"; return; }
+
+    document.getElementById("pageTitle").textContent = `${p.nama} | Cap Laut Biru`;
+    document.getElementById("pageDesc").setAttribute("content", p.ringkasan);
+    document.getElementById("crumbName").textContent = p.nama;
+
+    const stokBadge = p.stok === "tersedia"
+      ? `<span class="stock-badge"><span class="dot"></span> Stok Tersedia</span>`
+      : `<span class="stock-badge" style="color:#B8842B;background:#fbeecd;"><span class="dot" style="background:#B8842B;"></span> Stok Habis</span>`;
+
+    el.innerHTML = `
+      <div class="detail-media">
+        <div class="product-media">
+          <span class="product-label">${p.label}</span>
+          <img class="stamp-mini" style="width:64px;height:64px;opacity:.55;" src="assets/logo-dark.svg" alt="Cap Laut Biru">
+        </div>
+      </div>
+      <div class="detail-info">
+        <h1>${p.nama}</h1>
+        <div class="detail-price">${p.harga}<small>per kemasan ${p.berat}</small></div>
+        ${stokBadge}
+        <p class="detail-desc">${p.deskripsiLengkap}</p>
+        <table class="spec-table">
+          <tr><td>Berat</td><td>${p.berat}</td></tr>
+          <tr><td>Cara Penyajian</td><td>${p.caraPenyajian}</td></tr>
+          <tr><td>Penyimpanan</td><td>${p.penyimpanan}</td></tr>
+        </table>
+        <div class="detail-actions">
+          <a class="btn btn-primary" data-link="SHOPEE_URL" target="_blank" rel="noopener">🛒 Beli di Shopee</a>
+          <a class="btn btn-secondary" data-link="whatsapp" target="_blank" rel="noopener">💬 Pesan via WhatsApp</a>
+        </div>
+      </div>
+    `;
+
+    // suntik ulang stempel & link untuk elemen yang baru dibuat di atas
+    CLB.injectSocialIcons(el);
+    CLB.applyLinks();
+  });
+</script>
+</body>
+</html>
