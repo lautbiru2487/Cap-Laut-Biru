@@ -95,8 +95,7 @@ button{font-family:inherit;cursor:pointer;}
 .navbar{
   position:sticky;top:0;z-index:100;
   height:var(--nav-h);
-  background:rgba(251,247,239,0.92);
-  backdrop-filter:blur(10px);
+  background:var(--color-cream);
   border-bottom:1px solid var(--color-line);
 }
 .navbar .container{height:100%;display:flex;align-items:center;justify-content:space-between;}
@@ -117,13 +116,16 @@ button{font-family:inherit;cursor:pointer;}
   .nav-menu{
     position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
     background:var(--color-cream);
+    opacity:1;
+    z-index:99;
+    box-shadow:0 12px 24px -12px rgba(6,58,92,0.25);
     flex-direction:column;align-items:flex-start;gap:2px;
     padding:20px 24px 30px;
-    transform:translateY(-8px);opacity:0;visibility:hidden;pointer-events:none;
-    transition:all .22s ease;
+    transform:translateY(-8px);visibility:hidden;pointer-events:none;
+    transition:transform .22s ease, visibility .22s ease;
   }
-  .nav-menu.open{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto;}
-  .nav-menu a{width:100%;padding:14px 0;border-bottom:1px solid var(--color-line);}
+  .nav-menu.open{transform:translateY(0);visibility:visible;pointer-events:auto;}
+  .nav-menu a{width:100%;padding:14px 0;border-bottom:1px solid var(--color-line);background:var(--color-cream);}
   .nav-toggle{display:inline-flex;}
   .nav-cta .btn span.long{display:none;}
 }
