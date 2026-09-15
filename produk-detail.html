@@ -6,7 +6,7 @@
 <title id="pageTitle">Detail Produk | Cap Laut Biru</title>
 <meta name="description" id="pageDesc" content="Detail produk kerupuk Cap Laut Biru.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -103,6 +103,32 @@
       ? `<span class="stock-badge"><span class="dot"></span> Stok Tersedia</span>`
       : `<span class="stock-badge" style="color:#B8842B;background:#fbeecd;"><span class="dot" style="background:#B8842B;"></span> Stok Habis</span>`;
 
+    const shopeeBtn = p.slug === "kerupuk-matang"
+      ? ""
+      : `<a class="btn btn-primary" data-link="SHOPEE_URL" target="_blank" rel="noopener">🛒 Beli di Shopee</a>`;
+
+    const FRYING_STEPS = [
+      { judul: "Jemur dulu", teks: "Disarankan jemur terlebih dahulu hingga kering agar bisa mengembang maksimal." },
+      { judul: "Panaskan minyak", teks: "Panaskan minyak banyak dengan api sedang." },
+      { judul: "Masukkan bertahap", teks: "Masukkan kerupuk secara bertahap, jangan terlalu banyak sekaligus." },
+      { judul: "Aduk sebentar", teks: "Aduk sebentar hingga mengembang sempurna." },
+      { judul: "Angkat & tiriskan", teks: "Angkat dan tiriskan sebelum disajikan." },
+    ];
+
+    const fryingSection = p.slug === "kerupuk-mentah"
+      ? `<div class="fry-steps">
+          <h3>🍳 Cara Menggoreng</h3>
+          ${FRYING_STEPS.map((s, i) => `
+            <div class="fry-step">
+              <span class="fry-num">${i + 1}</span>
+              <div>
+                <strong>${s.judul}</strong>
+                <p>${s.teks}</p>
+              </div>
+            </div>`).join("")}
+        </div>`
+      : "";
+
     el.innerHTML = `
       <div class="detail-media">
         <div class="product-media">
@@ -121,9 +147,10 @@
           <tr><td>Penyimpanan</td><td>${p.penyimpanan}</td></tr>
         </table>
         <div class="detail-actions">
-          <a class="btn btn-primary" data-link="SHOPEE_URL" target="_blank" rel="noopener">🛒 Beli di Shopee</a>
+          ${shopeeBtn}
           <a class="btn btn-secondary" data-link="whatsapp" target="_blank" rel="noopener">💬 Pesan via WhatsApp</a>
         </div>
+        ${fryingSection}
       </div>
     `;
 
