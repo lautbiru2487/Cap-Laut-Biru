@@ -62,6 +62,13 @@
       const key = el.getAttribute("data-business");
       if (D.BUSINESS && D.BUSINESS[key]) el.textContent = D.BUSINESS[key];
     });
+    document.querySelectorAll("[data-map]").forEach((el) => {
+      const alamat = D.BUSINESS && D.BUSINESS.alamat;
+      if (alamat && alamat !== "[DATA BELUM DIISI]") {
+        const q = encodeURIComponent(alamat);
+        el.innerHTML = `<iframe src="https://maps.google.com/maps?q=${q}&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Cap Laut Biru"></iframe>`;
+      }
+    });
   }
 
   // ---- Navbar mobile toggle (tidak tergantung data, aman dijalankan lebih awal) ----
