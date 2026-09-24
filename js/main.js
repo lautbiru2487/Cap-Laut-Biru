@@ -58,6 +58,10 @@
     document.querySelectorAll("[data-wa-number]").forEach((el) => {
       el.textContent = "+" + D.SOCIALS.WHATSAPP_NUMBER;
     });
+    document.querySelectorAll("[data-business]").forEach((el) => {
+      const key = el.getAttribute("data-business");
+      if (D.BUSINESS && D.BUSINESS[key]) el.textContent = D.BUSINESS[key];
+    });
   }
 
   // ---- Navbar mobile toggle (tidak tergantung data, aman dijalankan lebih awal) ----
