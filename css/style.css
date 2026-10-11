@@ -457,3 +457,8 @@ button{font-family:inherit;cursor:pointer;}
   .product-grid{grid-template-columns:1fr;}
   .why-grid,.testi-grid{gap:18px;}
 }
+
+/* Foto produk & hero (muncul jika URL foto diisi di Supabase) */
+.product-media .product-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.product-media .product-label{z-index:2;}
+.hero-visual-frame .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
