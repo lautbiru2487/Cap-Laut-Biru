@@ -6,7 +6,7 @@
 <title id="pageTitle">Detail Produk | Cap Laut Biru</title>
 <meta name="description" id="pageDesc" content="Detail produk kerupuk Cap Laut Biru.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -133,7 +133,9 @@
       <div class="detail-media">
         <div class="product-media">
           <span class="product-label">${p.label}</span>
-          <img class="stamp-mini" style="width:64px;height:64px;opacity:.55;" src="assets/logo.png" alt="Cap Laut Biru">
+          ${p.gambar && p.gambar[0]
+            ? `<img class="product-photo" src="${p.gambar[0]}" alt="${p.nama}">`
+            : `<img class="stamp-mini" style="width:64px;height:64px;opacity:.55;" src="assets/logo.png" alt="Cap Laut Biru">`}
         </div>
       </div>
       <div class="detail-info">
