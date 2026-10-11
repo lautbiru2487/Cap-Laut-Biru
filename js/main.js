@@ -62,6 +62,10 @@
       const key = el.getAttribute("data-business");
       if (D.BUSINESS && D.BUSINESS[key]) el.textContent = D.BUSINESS[key];
     });
+    document.querySelectorAll("[data-hero-image]").forEach((el) => {
+      const src = D.HERO_IMAGE;
+      if (src) el.innerHTML = `<img class="hero-photo" src="${src}" alt="Produk Cap Laut Biru">`;
+    });
     document.querySelectorAll("[data-map]").forEach((el) => {
       const alamat = D.BUSINESS && D.BUSINESS.alamat;
       if (alamat && alamat !== "[DATA BELUM DIISI]") {
@@ -135,11 +139,15 @@
       <article class="product-card reveal">
         <div class="product-media">
           <span class="product-label">${p.label}</span>
-          <svg class="stamp-mini" viewBox="0 0 60 60" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+          ${
+            p.gambar && p.gambar[0]
+              ? `<img class="product-photo" src="${p.gambar[0]}" alt="${p.nama}" loading="lazy">`
+              : `<svg class="stamp-mini" viewBox="0 0 60 60" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M6 34c8-14 24-14 32 0" stroke-linecap="round"/>
             <path d="M42 34l10-6v12z" fill="currentColor" stroke="none"/>
             <path d="M4 44c10-6 16-6 26 0s16 6 26 0" stroke-linecap="round"/>
-          </svg>
+          </svg>`
+          }
         </div>
         <div class="product-body">
           <h3>${p.nama}</h3>
